@@ -10,6 +10,7 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+
   
   
 }
@@ -20,7 +21,7 @@ input {
 }
 
 .search-form {
-  max-width: 400px;
+  max-width: 45%;
   margin: 50px auto;
 }
 
@@ -29,8 +30,8 @@ input.search {
   text-align: center;
   outline: 0;
   border: 10px solid #F7F7F7;
-  width: 120%;
-  left: -10%;
+  width: 150%;
+  left: -25%;
   position: relative;
   top: 10px;
   z-index: 2;
@@ -59,6 +60,17 @@ li.result {
 
   text-align: center;
 } */
+
+li.result-gen {
+  background-color: burlywood;
+  font-size: 14px;
+}
+
+li#more {
+  background-color: gray;
+  text-align: center;
+  font-weight: 800;
+}
 
 
 li.filter-btn {

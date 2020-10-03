@@ -22,8 +22,8 @@ fetch(endpoint)
 
 // This listens for a click on the filter button, and collects what was entered into the input box
 var inputChange = document.querySelector('.search');
-// inputChange.addEventListener('change', showResults); 
-inputChange.addEventListener('keydown', showResults); 
+inputChange.addEventListener('change', showResults); 
+inputChange.addEventListener('keyup', showResults); 
 
 document.querySelector('.search').onkeydown = function(event) {
     if (event.keyCode == 13) {
@@ -38,28 +38,29 @@ function runMatch() {
     var textInput = document.querySelector('input');
     var wordToMatch = (textInput.value);
     // console.log("Found the term: " + wordToMatch);
-    var results = findMatches(wordToMatch, cities);    
+    var results = findMatches(wordToMatch, cities);  
+    console.log(wordToMatch);  
     // console.log("There were " + results.length + " results found.");
     // console.table(results);
     return results
 }
 
 // Detects click on "City" button, and changes colour to red while mouse is held
-var filterBtn = document.getElementById('filter');
-filterBtn.addEventListener('mousedown', gotClickedDn);
+// var filterBtn = document.getElementById('filter');
+// filterBtn.addEventListener('mousedown', gotClickedDn);
 
-function gotClickedDn() {
-    filterBtn.style.background = "red";
-    filterBtn.style.transitionDuration = "2s";
-    filterBtn.style.transitionTimingFunction = "cubic-bezier(0,1.12,.65,.92)";
-    showResults();
-}
+// function gotClickedDn() {
+//     filterBtn.style.background = "red";
+//     filterBtn.style.transitionDuration = "2s";
+//     filterBtn.style.transitionTimingFunction = "cubic-bezier(0,1.12,.65,.92)";
+//     showResults();
+// }
 
-// Detects unclick on "City" button, and changes colour to orange
-filterBtn.addEventListener('mouseup', gotClickedUp);
-function gotClickedUp() {
-    filterBtn.style.background = "gray"
-}
+// // Detects unclick on "City" button, and changes colour to orange
+// filterBtn.addEventListener('mouseup', gotClickedUp);
+// function gotClickedUp() {
+//     filterBtn.style.background = "gray"
+// }
 
 // Show results of match
 function showResults() {
@@ -79,11 +80,22 @@ function showResults() {
 
         // Iterates through array and displays as HTML
         const newTile = document.querySelector('.results')
+        const maxResults = 15;
         if (print.length < 1) {
             console.log("Didn't find anything");
             newTile.innerHTML += `<li class="result-gen">No results found</li>`;
-            } else if (print.length > 20) {
-                    newTile.innerHTML += `<li class="result-gen">${print.length} results found</li>`;
+            } else if (print.length > maxResults) {
+                var x = 0;
+                for(let numberOfResults = maxResults; x < numberOfResults; x++) {
+                    if (print.length > 0) {
+                    var results = print[x];
+                    console.log(results);
+    
+                    newTile.innerHTML += `<li class="result-gen">${results}</li>`;
+                    }
+                };
+                newTile.innerHTML += `<li class="result-gen" id="more"; style=font color="red";>${print.length - maxResults} more results...</style></li>`;
+                    
                 } else {
                     var x = 0;
                     for(let numberOfResults = print.length; x < numberOfResults; x++) {
@@ -98,25 +110,14 @@ function showResults() {
 };
 
 
-function createResults() { 
-    var x = 0;
-    for(let numberOfResults = print.length; x < numberOfResults; x++) {
-        // change this to display HTML
-        // 
-        var results = showResults[x];
-        console.log(showResults[x]);
-        const newTile = document.querySelector('.results')
-        newTile.innerHTML += `<li>${print}</li>`;
-    };
-};
-
-
-
-// function printToScreen() {
-//     // document.getElementById('addnew').innerHTML += "<h1> TEST </h1>";
-// }
-   
-//     // document.getElementById('state').innerHTML = print.forEach(element => {
-        
-//     // });;
+// function createResults() { 
+//     var x = 0;
+//     for(let numberOfResults = print.length; x < numberOfResults; x++) {
+//         var results = showResults[x];
+//         console.log(showResults[x]);
+//         const newTile = document.querySelector('.results')
+//         newTile.innerHTML += `<li>${print}</li>`;
+//     };
 // };
+
+
